@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Counter } from "./components/counter/Counter";
+// import Signin from "./components/auth/Signin";
 
 export default function IndexPage() {
-  return <Counter />;
+  return(
+    // <Signin></Signin>
+    <div>
+      this is the page
+    </div>
+  )
 }
 
 export const metadata: Metadata = {
