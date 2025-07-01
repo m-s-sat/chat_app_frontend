@@ -1,15 +1,23 @@
 "use client"
+import {loginUserAsync, selectUser } from "@/lib/features/Auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form"
 interface FormValues{
-    email:String,
-    password:String,
+    email:string,
+    password:string,
 }
 
 export default function Signin() {
   const {register, handleSubmit, formState:{errors}} = useForm<FormValues>();
+  const user = useAppSelector(selectUser);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   return (
     <>
+    {user && router.push('/')}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -23,7 +31,10 @@ export default function Signin() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit((data)=>{
+            console.log(data);
+            dispatch(loginUserAsync({email:data.email,password:data.password}))
+          })}>
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                 Email address

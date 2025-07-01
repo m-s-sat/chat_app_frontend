@@ -2,9 +2,8 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { StoreProvider } from "./StoreProvider";
 import { Nav } from "./components/Nav";
-
 import "./styles/globals.css";
-import styles from "./styles/layout.module.css";
+import AppShell from "./components/AppShell";
 
 interface Props {
   readonly children: ReactNode;
@@ -16,8 +15,7 @@ export default function RootLayout({ children }: Props) {
       <html lang="en">
         <body>
           <section>
-            <Nav />
-            <main>{children}</main>
+            <AppShell>{children}</AppShell>
           </section>
         </body>
       </html>

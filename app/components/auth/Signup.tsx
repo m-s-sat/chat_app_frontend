@@ -1,15 +1,24 @@
 "use client"
+import { createUserAsync, selectUser } from "@/lib/features/Auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {useForm} from "react-hook-form";
 interface FormValues{
-    email:String,
-    password:String,
-    confirmPassword:String,
+    email:string,
+    password:string,
+    confirmPassword:string,
 }
 
 export default function Signup(){
     const {register, handleSubmit,getValues, formState:{errors}} = useForm<FormValues>();
+    const user = useAppSelector(selectUser);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    
     return(
+    <>
+    {user && router.push('/')}
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -23,7 +32,9 @@ export default function Signup(){
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit((data)=>{
+            dispatch(createUserAsync({email:data.email,password:data.password}))
+          })}>
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                 Email address
@@ -115,5 +126,6 @@ export default function Signup(){
           </p>
         </div>
     </div>
+    </>
     )
 }
