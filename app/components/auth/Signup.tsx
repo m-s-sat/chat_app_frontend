@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {useForm} from "react-hook-form";
 interface FormValues{
-    email:string,
+    phoneNumber:Number,
+    username:string,
     password:string,
     confirmPassword:string,
 }
@@ -33,31 +34,52 @@ export default function Signup(){
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit((data)=>{
-            dispatch(createUserAsync({email:data.email,password:data.password}))
+            dispatch(createUserAsync({phoneNumber:data.phoneNumber,username:data.username,password:data.password}))
           })}>
             <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                Email address
+              <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
+                Username
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  {...register("email", {
-                    required: "Email is required",
+                  id="username"
+                  {...register("username", {
+                    required: "username is required",
                     pattern: {
-                        value: /^\S+@\S+\.\S+$/,
-                        message: "Invalid email format"
+                        value: /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/,
+                        message: "Invalid username format"
                     }
                   })}
-                  type="email"
+                  type="username"
                   required
-                  autoComplete="email"
+                  autoComplete="username"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
-                {errors.email && <p>{errors.email?.message}</p>}
+                {errors.username && <p className="text-red-500">{errors.username?.message}</p>}
               </div>
             </div>
-
+            <div>
+              <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
+                Phone Number
+              </label>
+              <div className="mt-2">
+                <input
+                  id="phone_number"
+                  {...register("phoneNumber", {
+                    required: "phoneNumber is required",
+                    pattern: {
+                        value: /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
+                        message: "Invalid phone number format"
+                    }
+                  })}
+                  type="tel"
+                  required
+                  autoComplete="phoneNumber"
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                />
+                {errors.username && <p className="text-red-500">{errors.username?.message}</p>}
+              </div>
+            </div>
             <div>
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
@@ -79,7 +101,7 @@ export default function Signup(){
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
-                {errors.password && <p>{errors.password?.message}</p>}
+                {errors.password && <p className="text-red-500">{errors.password?.message}</p>}
               </div>
             </div>
             <div>
@@ -105,7 +127,7 @@ export default function Signup(){
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
-                {errors.confirmPassword && <p>{errors.confirmPassword?.message}</p>}
+                {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword?.message}</p>}
               </div>
             </div>
             <div>

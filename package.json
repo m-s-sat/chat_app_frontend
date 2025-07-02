@@ -1,6 +1,6 @@
 {
   "private": true,
-  "proxy":"http://lcoalhost:8080",
+  "proxy": "http://lcoalhost:8080",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -9,6 +9,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
     "@tailwindcss/postcss": "^4.1.11",
+    "bootstrap": "^5.3.7",
+    "mdb-react-ui-kit": "^9.0.0",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

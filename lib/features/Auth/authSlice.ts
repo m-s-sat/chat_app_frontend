@@ -5,7 +5,7 @@ import { checkUser, createUser, loginUser } from "./authAPI";
 
 
 export interface AuthSliceState {
-  user: { email: string; id: string } | null;
+  user: { username: string; id: string } | null;
   status: "idle" | "loading" | "failed";
 }
 
@@ -19,7 +19,7 @@ export const authSlice = createAppSlice({
   initialState,
   reducers: (create) => ({
     createUserAsync: create.asyncThunk(
-      async (userData: {email:string,password:string}) => {
+      async (userData: {phoneNumber:Number,username:string,password:string}) => {
         const response = await createUser(userData);
         return response.data;
       },
@@ -38,7 +38,7 @@ export const authSlice = createAppSlice({
 
     ),
     loginUserAsync: create.asyncThunk(
-      async (userData: {email:string,password:string}) => {
+      async (userData: {username:string,password:string}) => {
         const response = await loginUser(userData);
         return response.data;
       },

@@ -1,8 +1,8 @@
 interface createUserResponse{
     id:string,
-    email:string
+    username:string
 }
-export function createUser(userData:{email:string,password:string}):Promise<{data:createUserResponse}>{
+export function createUser(userData:{phoneNumber:Number,username:string,password:string}):Promise<{data:createUserResponse}>{
     return new Promise(async(resolve,reject)=>{
         const response = await fetch('/api/auth/signup',{
             method:"POST",
@@ -15,7 +15,7 @@ export function createUser(userData:{email:string,password:string}):Promise<{dat
     })
 }
 
-export function loginUser(userData:{email:string,password:string}):Promise<{data:createUserResponse}>{
+export function loginUser(userData:{username:string,password:string}):Promise<{data:createUserResponse}>{
     return new Promise(async(resolve,reject)=>{
         const response = await fetch('/api/auth/signin',{
             method:"POST",

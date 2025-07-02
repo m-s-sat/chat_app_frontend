@@ -1,10 +1,9 @@
 "use client"
-// import Signin from "./components/auth/Signin";
-
 import { selectUser } from "@/lib/features/Auth/authSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import Chat from "./components/chat_ui/Chat"
 
 export default function IndexPage() {
   const user = useAppSelector(selectUser)
@@ -15,9 +14,9 @@ export default function IndexPage() {
   return(
   <>
   {!user && router.push('/auth/signin')}
-    <div>
-      this is the page
-    </div>
+  <div className="full-height">
+    <Chat></Chat>
+  </div>
   </>
   )
 }

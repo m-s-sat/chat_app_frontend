@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form"
 interface FormValues{
-    email:string,
+    username:string,
     password:string,
 }
 
@@ -33,23 +33,23 @@ export default function Signin() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit((data)=>{
             console.log(data);
-            dispatch(loginUserAsync({email:data.email,password:data.password}))
+            dispatch(loginUserAsync({username:data.username,password:data.password}))
           })}>
             <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                Email address
+              <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
+                Username
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  {...register("email",{required:"Email is required"})}
-                  type="email"
+                  id="username"
+                  {...register("username",{required:"username is required"})}
+                  type="username"
                   required
-                  autoComplete="email"
+                  autoComplete="username"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+              {errors.username && <p className="text-red-500">{errors.username.message}</p>}
             </div>
 
             <div>
